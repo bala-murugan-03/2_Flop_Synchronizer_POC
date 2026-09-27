@@ -1,4 +1,4 @@
-# ⚡ 2-Stage Flip-Flop Synchronizer: Hardware CDC Proof-of-Concept
+# 2-Stage Flip-Flop Synchronizer: Hardware CDC Proof-of-Concept
 
 [![Vivado](https://img.shields.io/badge/Vivado-2020.2+-orange.svg)](#)
 [![Target-FPGA](https://img.shields.io/badge/Target-PYNQ--Z2%20(Zynq--7020)-blue.svg)](#)
@@ -6,7 +6,6 @@
 [![Domain Crossing](https://img.shields.io/badge/CDC-Clock%20Domain%20Crossing-red.svg)](#)
 
 A hardware-level Proof of Concept (PoC) demonstrating **Clock Domain Crossing (CDC) setup/hold aperture violations** and experimentally validating how a **2-Stage Flip-Flop (2-FF) Synchronizer** mitigates metastability and exponentially improves **Mean Time Between Failures (MTBF)**.
-# 2-Stage Flip-Flop Synchronizer: Hardware CDC Proof-of-Concept
 
 ---
 
