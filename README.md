@@ -40,24 +40,14 @@ Simulated over a 50 us window across 7,351 Clock B cycles:
 
 In the Tcl Console, execute:
      ```tcl
-        report_cdc -details
+     report_cdc -details
      ```
 
-CDC Report
 
-ID     Severity  Count  Description
------  --------  -----  ------------------------------------------
-CDC-1  Critical      1  1-bit unknown CDC circuitry
-CDC-3  Info          1  1-bit synchronized with ASYNC_REG property
-
-Source Clock: clk_a
-Destination Clock: clk_b
-CDC Type: No Common Primary Clock
-
-Row  ID     Severity  Description                                 Depth  Exception            Source (From)   Destination (To)
----  -----  --------  ------------------------------------------  -----  -------------------  --------------  -----------------
-  1  CDC-3  Info      1-bit synchronized with ASYNC_REG property      2  Asynch Clock Groups  toggle_a_reg/C  meta_stage1_reg/D
-  2  CDC-1  Critical  1-bit unknown CDC circuitry                     0  Asynch Clock Groups  toggle_a_reg/C  y_single_reg/D
+| CDC ID | Severity | Description | Depth | Source Register (Domain A) | Destination Register (Domain B) | Verdict |
+| :---: | :---: | :--- | :---: | :--- | :--- | :--- |
+| **CDC-3** | **Info** | 1-bit synchronized with `ASYNC_REG` | 2 | `toggle_a_reg/C` | `meta_stage1_reg/D` | **Safe** (Cascaded 2-FF Topology) |
+| **CDC-1** | **Critical** | 1-bit unknown CDC circuitry | 0 | `toggle_a_reg/C` | `y_single_reg/D` | **Unsafe** (Unsynchronized direct endpoint) |
 
 
 ## Architectural Overview
