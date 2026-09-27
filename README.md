@@ -14,7 +14,7 @@ A hardware-level Proof of Concept (PoC) demonstrating **Clock Domain Crossing (C
 
 In pure behavioral RTL simulation, digital flip-flops operate as mathematical abstractions with zero setup/hold apertures, deterministically resolving races to binary states (0 or 1). As a result, metastability and CDC collisions remain invisible in standard RTL simulation.
 
-By running Post-Implementation Timing Simulation with physical Standard Delay Format (SDF) back-annotation on a Xilinx Zynq-7020 architecture, this project captures:
+By running Post-Implementation Timing Simulation with physical Standard Delay Format (SDF) back-annotation on a Xilinx pynq-z2 architecture, this project captures:
 * 294 Timing Aperture Violations (`$setuphold`) on an unsynchronized 1-FF receiver.
 * 0 Violations on the second stage of the 2-FF synchronizer.
 
@@ -36,6 +36,29 @@ Simulated over a 50 us window across 7,351 Clock B cycles:
 * `sync_2ff_violations` stays flat at 0 across the entire duration.
 
 ---
+**CDC REPORT FROM VIVADO**
+
+In the Tcl Console, execute:
+     ```tcl
+        report_cdc -details
+     ```
+
+CDC Report
+
+ID     Severity  Count  Description
+-----  --------  -----  ------------------------------------------
+CDC-1  Critical      1  1-bit unknown CDC circuitry
+CDC-3  Info          1  1-bit synchronized with ASYNC_REG property
+
+Source Clock: clk_a
+Destination Clock: clk_b
+CDC Type: No Common Primary Clock
+
+Row  ID     Severity  Description                                 Depth  Exception            Source (From)   Destination (To)
+---  -----  --------  ------------------------------------------  -----  -------------------  --------------  -----------------
+  1  CDC-3  Info      1-bit synchronized with ASYNC_REG property      2  Asynch Clock Groups  toggle_a_reg/C  meta_stage1_reg/D
+  2  CDC-1  Critical  1-bit unknown CDC circuitry                     0  Asynch Clock Groups  toggle_a_reg/C  y_single_reg/D
+
 
 ## Architectural Overview
 
@@ -73,7 +96,7 @@ To expose physical timing collisions instead of allowing the simulator to silent
 
 ---
 
-## Reproduction Steps
+## Steps to Reproduce this behaviour
 
 1. **Clone this repository**
 
