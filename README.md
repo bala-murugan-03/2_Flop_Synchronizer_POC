@@ -39,7 +39,7 @@ Simulated over a 50 us window across 7,351 Clock B cycles:
 **CDC REPORT FROM VIVADO**
 
 In the Tcl Console, execute:
-     ```tcl
+     ```
      report_cdc -details
      ```
 
